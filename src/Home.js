@@ -1,34 +1,20 @@
 import { useState } from "react";
-//to make variables reactive 
-// reactive value: something that might change its value at some point
 
 const Home = () => {
-    // let name = 'miya';
-
-    // can use the same hook in a component for diff values
-    // datatype of state can be anything, object, boolean, etc
-    const [name, setName] = useState('miya'); //initial value=' miya'
-    //save it in an array destructuring to store two values this hook returns
-    //name: any var for storing initial value 'miya'
-    // setVariable: function to change variable (typical format)
-
-    const [age, setAge] = useState(25);
-
-    const handleClick = (e) =>{
-        // name = 'louis';
-        // console.log(name); 
-        //without useState hook, the value of name will be changed but
-        // wont be reflected in the page
-        // as after the change, the component is not re-rendreded
-        setName('louis');
-        setAge(30);
-    }
- 
+    const [blogs, setBlogs] = useState([
+        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
+        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
+        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
+    ]);
     return ( 
         <div className="home">
-            <h1>Home Page</h1>
-            <p>{ name } is { age } years old</p>
-            <button onClick={handleClick}>Click me</button>
+            {/* can hardcode each blog in a div but crud wont work then also time consuming */}
+            {blogs.map((blog) => (
+                <div className="blog-preview" key={blog.id}>
+                    <h2>{ blog.title }</h2>
+                    <p>Written by { blog.author }</p>
+                </div>
+            ))}
         </div>
      );
 }
