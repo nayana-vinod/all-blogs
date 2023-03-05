@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 
 const Home = () => {
     const [blogs, setBlogs] = useState([
@@ -8,13 +9,14 @@ const Home = () => {
     ]);
     return ( 
         <div className="home">
-            {/* can hardcode each blog in a div but crud wont work then also time consuming */}
-            {blogs.map((blog) => (
-                <div className="blog-preview" key={blog.id}>
-                    <h2>{ blog.title }</h2>
-                    <p>Written by { blog.author }</p>
-                </div>
-            ))}
+            {/* passing blogs as prop which is "blogs = { blogs }" */}
+            {/* <BlogList blogs = { blogs } /> */}
+
+            {/* passing multiple props */}
+            <BlogList blogs={ blogs } title="All Blogs" />
+            
+            {/* useful for like search pages where blog.title === the search term */}
+            <BlogList blogs={ blogs.filter((blog)=> blog.author === 'mario') } title="Mario's Blogs" /> 
         </div>
      );
 }
