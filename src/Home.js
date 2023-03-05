@@ -14,7 +14,7 @@ const Home = () => {
 
             {/* passing multiple props */}
             <BlogList blogs={ blogs } title="All Blogs" />
-            
+
             {/* useful for like search pages where blog.title === the search term */}
             <BlogList blogs={ blogs.filter((blog)=> blog.author === 'mario') } title="Mario's Blogs" /> 
         </div>
