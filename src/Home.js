@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
@@ -12,6 +12,18 @@ const Home = () => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
         setBlogs(newBlogs);
     }
+
+    // can be used for fetching data
+    // runs the function on every render of the component
+    useEffect(()=>{
+        console.log('use effect run')
+        // on changing the data, because of useState the component is re-rendered
+        // and useEffect is run on every re-render
+
+        console.log(blogs);
+        // do not crud data here causes infinite loop because crud updates states => rerenders component => 
+        // runs useEffect again => crud data => updates state => rerender => useState again
+    })
 
     return ( 
         <div className="home">
