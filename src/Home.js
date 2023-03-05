@@ -7,16 +7,16 @@ const Home = () => {
         { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
     ]);
+
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
     return ( 
         <div className="home">
-            {/* passing blogs as prop which is "blogs = { blogs }" */}
-            {/* <BlogList blogs = { blogs } /> */}
-
-            {/* passing multiple props */}
-            <BlogList blogs={ blogs } title="All Blogs" />
-
-            {/* useful for like search pages where blog.title === the search term */}
-            <BlogList blogs={ blogs.filter((blog)=> blog.author === 'mario') } title="Mario's Blogs" /> 
+            {/* handleDelete function is passed as a prop to src/BlogList.js */}
+            <BlogList blogs={ blogs } title="All Blogs" handleDelete={handleDelete}/>
         </div>
      );
 }
