@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
   const [title, setTitle] = useState('');
@@ -6,6 +7,7 @@ const Create = () => {
 //   mario because it should one of the selectable values from 'option' tag as the default value, meaning same spelling etc
   const [author, setAuthor] = useState('yoshi');
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     // default is to refresh the page
@@ -26,8 +28,11 @@ const Create = () => {
         //   converts the blog object to a JSON string
         body: JSON.stringify(blog)
         }).then(() => {
-        console.log('new blog added');
-        setIsLoading(false);
+        // console.log('new blog added');
+        // setIsLoading(false);
+        
+        // history.go(-1);
+        history.push('/');
         })
     }, 500)
   }
