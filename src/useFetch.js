@@ -15,7 +15,7 @@ const useFetch = (url) =>{
         // associate this with a specific fetch request so as to stop the fetch using abortcontroller
         const abortCont = new AbortController();
 
-        // setTimeout for an extra 1sec lag so that the loading is more visible 
+        // setTimeout for an extra 0.5sec lag so that the loading is more visible 
         setTimeout(() => {
             // signal is an optional argument
         fetch(url, { signal: abortCont.signal })
@@ -27,7 +27,6 @@ const useFetch = (url) =>{
             })
             // this and in setData called data, but that is fine as below is a local version so doesnt matter that the names clash
             .then(data => {
-                console.log(data)
                 setIsLoading(false);
                 setData(data);
                 setError(null);
@@ -42,10 +41,10 @@ const useFetch = (url) =>{
                 }
                 
             })
-        }, 1000);
+        }, 500);
 
         return () =>{
-            console.log('cleanup')
+            // console.log('cleanup')
             abortCont.abort();
             // fetch throws an error and is catching the error, there state is updated, and will still try to update the home component with that state meaning error will still be shown => use if else in catch like above
         }
