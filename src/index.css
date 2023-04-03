@@ -70,3 +70,7 @@ and other UI components where we want to position certain elements to the right 
   color: #f1356d;
   margin-bottom: 8px;
 }
+
+.blog-preview a{
+  text-decoration: none;
+}

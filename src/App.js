@@ -4,6 +4,7 @@ import Home from './Home';
 // as Router meaning can use BrowserRouter by the name 'Router' here
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './Create';
+import BlogDetails from './BlogDetails';
 
 // surround the div with Router component so that Router is accessible in the whole app or everything inside Router div
 function App() {
@@ -27,6 +28,10 @@ function App() {
 
                     <Route path="/create">
                         <Create/>
+                    </Route>
+                    {/* route parameter id */}
+                    <Route path="/blogs/:id">
+                        <BlogDetails/>
                     </Route>
                 </Switch>
             </div>
