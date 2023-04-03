@@ -11,9 +11,14 @@ const useFetch = (url) =>{
 
     // runs the function on every render of the component
     useEffect(()=>{
+
+        // associate this with a specific fetch request so as to stop the fetch using abortcontroller
+        const abortCont = new AbortController();
+
         // setTimeout for an extra 1sec lag so that the loading is more visible 
         setTimeout(() => {
-        fetch(url)
+            // signal is an optional argument
+        fetch(url, { signal: abortCont.signal })
             .then(response => {
                 if(!response.ok){
                     throw new Error('could not fetch the data for that resource')
@@ -29,11 +34,21 @@ const useFetch = (url) =>{
             })
             // catches network error, try after stopping the json server
             .catch(err =>{
-                setIsLoading(false);
-                setError(err.message);
-
+                if(err.name == 'AbortError'){
+                    console.log('fetch aborted')
+                } else {
+                    setIsLoading(false);
+                    setError(err.message);
+                }
+                
             })
         }, 1000);
+
+        return () =>{
+            console.log('cleanup')
+            abortCont.abort();
+            // fetch throws an error and is catching the error, there state is updated, and will still try to update the home component with that state meaning error will still be shown => use if else in catch like above
+        }
     },[url]);
     // url added as dependency so that this is rerendered everytime url is changed, hence data from new url is fetched
 
